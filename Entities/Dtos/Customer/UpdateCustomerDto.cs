@@ -1,6 +1,4 @@
 ﻿using Core.Entities;
-using Entities.Dtos.Address;
-using Entities.Dtos.TelephoneNumber;
 
 namespace Entities.Dtos.Customer
 {
@@ -11,8 +9,5 @@ namespace Entities.Dtos.Customer
         public string Surname { get; set; }
         public string TcNo { get; set; }
         public string Email { get; set; }
-
-        public List<UpdateAddressDto> Addresses { get; set; }
-        public List<UpdateTelephoneNumberDto> TelephoneNumbers { get; set; }
     }
 }

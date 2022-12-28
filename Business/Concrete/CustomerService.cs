@@ -28,7 +28,7 @@ namespace Business.Concrete
         {
             Customer customer = await _customerRepository.GetAsync(x => x.Id == id);
             CustomerDto customerDto = _mapper.Map<CustomerDto>(customer);
-            return Response<CustomerDto>.Success(customerDto, "Müşteriler listelendi.");
+            return Response<CustomerDto>.Success(customerDto, "Müşteri id ye göre getirildi.");
         }
 
         public async Task<IResponse<NoContent>> AddAsync(CreateCustomerDto createCustomerDto)

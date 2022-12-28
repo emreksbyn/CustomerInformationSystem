@@ -1,5 +1,4 @@
 ﻿using Core.Entities;
-using Entities.Dtos.Customer;
 
 namespace Entities.Dtos.Address
 {
@@ -10,6 +9,5 @@ namespace Entities.Dtos.Address
         public string District { get; set; }
 
         public int CustomerId { get; set; }
-        public CustomerDto Customer { get; set; }
     }
 }
