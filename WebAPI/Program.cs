@@ -1,5 +1,14 @@
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using Business.IoC.Autofac;
+
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
+    .ConfigureContainer<ContainerBuilder>(builder =>
+    {
+        builder.RegisterModule(new AutofacBusinessModule());
+    });
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

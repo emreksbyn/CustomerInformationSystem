@@ -12,7 +12,7 @@ namespace Entities.Dtos.Customer
         public string TcNo { get; set; }
         public string Email { get; set; }
 
-        public List<AddressDto> Addresses { get; set; }
-        public List<TelephoneNumberDto> TelephoneNumbers { get; set; }
+        public List<UpdateAddressDto> Addresses { get; set; }
+        public List<UpdateTelephoneNumberDto> TelephoneNumbers { get; set; }
     }
 }

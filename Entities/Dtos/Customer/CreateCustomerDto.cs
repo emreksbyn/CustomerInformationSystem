@@ -11,7 +11,7 @@ namespace Entities.Dtos.Customer
         public string TcNo { get; set; }
         public string Email { get; set; }
 
-        public List<AddressDto> Addresses { get; set; }
-        public List<TelephoneNumberDto> TelephoneNumbers { get; set; }
+        public List<CreateAddressDto> Addresses { get; set; }
+        public List<CreateTelephoneNumberDto> TelephoneNumbers { get; set; }
     }
 }

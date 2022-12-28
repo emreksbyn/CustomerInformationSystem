@@ -37,7 +37,7 @@ namespace Core.DataAccess.EntityFramework
             }
         }
 
-        public async Task<IList<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> filter = null)
+        public async Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> filter = null)
         {
             using (var context = new TContext())
             {
