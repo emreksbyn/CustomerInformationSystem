@@ -15,6 +15,12 @@ namespace Business.IoC.Autofac
             builder.RegisterType<EfCustomerRepository>().As<ICustomerRepository>();
             builder.RegisterType<CustomerService>().As<ICustomerService>();
 
+            builder.RegisterType<EfAddressRepository>().As<IAddressRepository>();
+            builder.RegisterType<AddressService>().As<IAddressService>();
+
+            builder.RegisterType<EfTelephoneNumberRepository>().As<ITelephoneNumberRepository>();
+            builder.RegisterType<TelephoneNumberService>().As<ITelephoneNumberService>();
+
             #region AutoMapper Register
             builder.Register(context => new MapperConfiguration(cfg =>
             {

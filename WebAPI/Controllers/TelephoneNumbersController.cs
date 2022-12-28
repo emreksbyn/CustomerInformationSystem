@@ -1,23 +1,23 @@
 ﻿using Business.Abstract;
-using Entities.Dtos.Customer;
+using Entities.Dtos.TelephoneNumber;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CustomersController : ControllerBase
+    public class TelephoneNumbersController : ControllerBase
     {
-        private readonly ICustomerService _customerService;
-        public CustomersController(ICustomerService customerService)
+        private readonly ITelephoneNumberService _telephoneNumberService;
+        public TelephoneNumbersController(ITelephoneNumberService telephoneNumberService)
         {
-            _customerService = customerService;
+            _telephoneNumberService = telephoneNumberService;
         }
 
         [HttpGet("get-all")]
         public async Task<IActionResult> GetAll()
         {
-            var response = await _customerService.GetAllAsync();
+            var response = await _telephoneNumberService.GetAllAsync();
             if (response.IsSuccessful) return Ok(response);
             return BadRequest(response.Message);
         }
@@ -25,31 +25,31 @@ namespace WebAPI.Controllers
         [HttpGet("get-by-id")]
         public async Task<IActionResult> GetById(int id)
         {
-            var response = await _customerService.GetByIdAsync(id);
+            var response = await _telephoneNumberService.GetByIdAsync(id);
             if (response.IsSuccessful) return Ok(response);
             return BadRequest(response.Message);
         }
 
         [HttpPost("create")]
-        public async Task<IActionResult> Create(CreateCustomerDto createCustomerDto)
+        public async Task<IActionResult> Create(CreateTelephoneNumberDto createTelephoneNumberDto)
         {
-            var response = await _customerService.AddAsync(createCustomerDto);
+            var response = await _telephoneNumberService.AddAsync(createTelephoneNumberDto);
             if (response.IsSuccessful) return Ok(response);
             return BadRequest(response.Message);
         }
 
         [HttpPut("update")]
-        public async Task<IActionResult> Update(UpdateCustomerDto updateCustomerDto)
+        public async Task<IActionResult> Update(UpdateTelephoneNumberDto updateTelephoneNumberDto)
         {
-            var response = await _customerService.UpdateAsync(updateCustomerDto);
+            var response = await _telephoneNumberService.UpdateAsync(updateTelephoneNumberDto);
             if (response.IsSuccessful) return Ok(response);
             return BadRequest(response.Message);
         }
 
         [HttpDelete("delete")]
-        public async Task<IActionResult> Delete(CustomerDto customerDto)
+        public async Task<IActionResult> Delete(TelephoneNumberDto telephoneNumberDto)
         {
-            var response = await _customerService.DeleteAsync(customerDto);
+            var response = await _telephoneNumberService.DeleteAsync(telephoneNumberDto);
             if (response.IsSuccessful) return Ok(response);
             return BadRequest(response.Message);
         }
