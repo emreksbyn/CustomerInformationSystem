@@ -30,6 +30,14 @@ namespace WebAPI.Controllers
             return BadRequest(response.Message);
         }
 
+        [HttpGet("get-customers-details")]
+        public async Task<IActionResult> GetCustomersDetails()
+        {
+            var response = await _customerService.GetCustomersDetailsAsync();
+            if (response.IsSuccessful) return Ok(response);
+            return BadRequest(response.Message);
+        }
+
         [HttpPost("create")]
         public async Task<IActionResult> Create(CreateCustomerDto createCustomerDto)
         {

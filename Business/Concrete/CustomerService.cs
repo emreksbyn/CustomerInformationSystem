@@ -31,6 +31,13 @@ namespace Business.Concrete
             return Response<CustomerDto>.Success(customerDto, "Müşteri id ye göre getirildi.");
         }
 
+        public async Task<IResponse<List<CustomerDetailsDto>>> GetCustomersDetailsAsync()
+        {
+            List<Customer> customers = await _customerRepository.GetCustomersDetailsAsync();
+            List<CustomerDetailsDto> customerDetailsDtos = _mapper.Map<List<CustomerDetailsDto>>(customers);
+            return Response<List<CustomerDetailsDto>>.Success(customerDetailsDtos, "Müşteriler listelendi.");
+        }
+
         public async Task<IResponse<NoContent>> AddAsync(CreateCustomerDto createCustomerDto)
         {
             Customer customer = _mapper.Map<Customer>(createCustomerDto);
@@ -50,6 +57,41 @@ namespace Business.Concrete
             Customer customer = _mapper.Map<Customer>(customerDto);
             await _customerRepository.DeleteAsync(customer);
             return Response<NoContent>.Success("Müşteri başarı ile silindi.");
+        }
+
+        public Task<IResponse<CustomerDetailsDto>> GetCustomerDetailsByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IResponse<NoContent>> AddCustomerWithDependentsAsync(CustomerDetailsDto customer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IResponse<NoContent>> AddRangeCustomersWithDependentsAsync(List<CustomerDetailsDto> customers)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IResponse<NoContent>> UpdateCustomerWithDependentsAsync(CustomerDetailsDto customer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IResponse<NoContent>> UpdateRangeCustomersWithDependentsAsync(List<CustomerDetailsDto> customers)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IResponse<NoContent>> DeleteCustomerWithDependentsAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IResponse<NoContent>> DeleteRangeCustomersWithDependentsAsync(List<int> ids)
+        {
+            throw new NotImplementedException();
         }
     }
 }

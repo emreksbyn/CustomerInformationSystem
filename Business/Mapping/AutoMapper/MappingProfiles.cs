@@ -13,6 +13,7 @@ namespace Business.Mapping.AutoMapper
             CreateMap<Customer, CreateCustomerDto>().ReverseMap();
             CreateMap<Customer, UpdateCustomerDto>().ReverseMap();
             CreateMap<Customer, CustomerDto>().ReverseMap();
+            CreateMap<Customer, CustomerDetailsDto>().ReverseMap();
 
             CreateMap<Address, CreateAddressDto>().ReverseMap();
             CreateMap<Address, UpdateAddressDto>().ReverseMap();
