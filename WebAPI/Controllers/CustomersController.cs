@@ -14,6 +14,7 @@ namespace WebAPI.Controllers
             _customerService = customerService;
         }
 
+        #region GetActions
         [HttpGet("get-all")]
         public async Task<IActionResult> GetAll()
         {
@@ -37,6 +38,16 @@ namespace WebAPI.Controllers
             if (response.IsSuccessful) return Ok(response);
             return BadRequest(response.Message);
         }
+
+        [HttpGet("get-customer-details-by-id")]
+        public async Task<IActionResult> GetCustomerDetailsById(int id)
+        {
+            var response = await _customerService.GetCustomerDetailsByIdAsync(id);
+            if (response.IsSuccessful) return Ok(response);
+            return BadRequest(response.Message);
+        }
+        #endregion
+
 
         [HttpPost("create")]
         public async Task<IActionResult> Create(CreateCustomerDto createCustomerDto)

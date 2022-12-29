@@ -4,6 +4,7 @@ using Core.Responses;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.Dtos.Customer;
+using System.Collections.Generic;
 
 namespace Business.Concrete
 {
@@ -17,6 +18,7 @@ namespace Business.Concrete
             _mapper = mapper;
         }
 
+        #region GetMethods
         public async Task<IResponse<List<CustomerDto>>> GetAllAsync()
         {
             List<Customer> customers = await _customerRepository.GetAllAsync();
@@ -38,6 +40,15 @@ namespace Business.Concrete
             return Response<List<CustomerDetailsDto>>.Success(customerDetailsDtos, "Müşteriler listelendi.");
         }
 
+        public async Task<IResponse<CustomerDetailsDto>> GetCustomerDetailsByIdAsync(int id)
+        {
+            Customer customer = await _customerRepository.GetCustomerDetailsByIdAsync(id);
+            CustomerDetailsDto customerDetailsDtos = _mapper.Map<CustomerDetailsDto>(customer);
+            return Response<CustomerDetailsDto>.Success(customerDetailsDtos, "Müşteri detayları id ye göre getirildi.");
+        }
+        #endregion
+
+        #region AddMethods
         public async Task<IResponse<NoContent>> AddAsync(CreateCustomerDto createCustomerDto)
         {
             Customer customer = _mapper.Map<Customer>(createCustomerDto);
@@ -45,53 +56,61 @@ namespace Business.Concrete
             return Response<NoContent>.Success("Müşteri başarı ile eklendi.");
         }
 
+        public async Task<IResponse<NoContent>> AddCustomerWithDependentsAsync(CustomerDetailsDto customerDetailsDto)
+        {
+            Customer customer = _mapper.Map<Customer>(customerDetailsDto);
+            await _customerRepository.AddCustomerWithDependentsAsync(customer);
+            return Response<NoContent>.Success("Müşteri ve bilgileri başarı ile eklendi.");
+        }
+
+        public async Task<IResponse<NoContent>> AddRangeCustomersWithDependentsAsync(List<CustomerDetailsDto> customerDetailsDtos)
+        {
+            List<Customer> customers = _mapper.Map<List<Customer>>(customerDetailsDtos);
+            await _customerRepository.AddRangeCustomersWithDependentsAsync(customers);
+            return Response<NoContent>.Success("Müşteriler ve bilgileri başarı ile eklendi.");
+        }
+        #endregion
+
+        #region UpdateMethods
         public async Task<IResponse<NoContent>> UpdateAsync(UpdateCustomerDto updateCustomerDto)
         {
             Customer customer = _mapper.Map<Customer>(updateCustomerDto);
             await _customerRepository.UpdateAsync(customer);
             return Response<NoContent>.Success("Müşteri başarı ile güncellendi.");
         }
+        public async Task<IResponse<NoContent>> UpdateCustomerWithDependentsAsync(CustomerDetailsDto customerDetailsDto)
+        {
+            Customer customer = _mapper.Map<Customer>(customerDetailsDto);
+            await _customerRepository.UpdateCustomerWithDependentsAsync(customer);
+            return Response<NoContent>.Success("Müşteri ve bilgileri başarı ile güncellendi.");
+        }
 
+        public async Task<IResponse<NoContent>> UpdateRangeCustomersWithDependentsAsync(List<CustomerDetailsDto> customerDetailsDtos)
+        {
+            List<Customer> customers = _mapper.Map<List<Customer>>(customerDetailsDtos);
+            await _customerRepository.UpdateRangeCustomersWithDependentsAsync(customers);
+            return Response<NoContent>.Success("Müşteriler ve bilgileri başarı ile güncellendi.");
+        }
+        #endregion
+
+        #region DeleteMethods
         public async Task<IResponse<NoContent>> DeleteAsync(CustomerDto customerDto)
         {
             Customer customer = _mapper.Map<Customer>(customerDto);
             await _customerRepository.DeleteAsync(customer);
             return Response<NoContent>.Success("Müşteri başarı ile silindi.");
         }
-
-        public Task<IResponse<CustomerDetailsDto>> GetCustomerDetailsByIdAsync(int id)
+        public async Task<IResponse<NoContent>> DeleteCustomerWithDependentsAsync(int id)
         {
-            throw new NotImplementedException();
+            await _customerRepository.DeleteCustomerWithDependentsAsync(id);
+            return Response<NoContent>.Success("Müşteri ve bilgileri başarı ile silindi.");
         }
 
-        public Task<IResponse<NoContent>> AddCustomerWithDependentsAsync(CustomerDetailsDto customer)
+        public async Task<IResponse<NoContent>> DeleteRangeCustomersWithDependentsAsync(List<int> ids)
         {
-            throw new NotImplementedException();
+            await _customerRepository.DeleteRangeCustomersWithDependentsAsync(ids);
+            return Response<NoContent>.Success("Müşteriler ve bilgileri başarı ile silindi.");
         }
-
-        public Task<IResponse<NoContent>> AddRangeCustomersWithDependentsAsync(List<CustomerDetailsDto> customers)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IResponse<NoContent>> UpdateCustomerWithDependentsAsync(CustomerDetailsDto customer)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IResponse<NoContent>> UpdateRangeCustomersWithDependentsAsync(List<CustomerDetailsDto> customers)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IResponse<NoContent>> DeleteCustomerWithDependentsAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IResponse<NoContent>> DeleteRangeCustomersWithDependentsAsync(List<int> ids)
-        {
-            throw new NotImplementedException();
-        }
+        #endregion
     }
 }
