@@ -32,7 +32,6 @@ namespace DataAccess.Concrete.EntityFramework
                     .ToListAsync();
 
                 return result;
-
             }
         }
         #endregion

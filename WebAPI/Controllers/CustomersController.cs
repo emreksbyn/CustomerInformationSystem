@@ -58,7 +58,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("create-with-details")]
-        public async Task<IActionResult> CreateWithDetails(CustomerDetailsDto customerDetailsDto)
+        public async Task<IActionResult> CreateWithDetails(CreateCustomerDetailsDto customerDetailsDto)
         {
             var response = await _customerService.AddCustomerWithDependentsAsync(customerDetailsDto);
             if (response.IsSuccessful) return Ok(response);
@@ -66,7 +66,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("create-many-with-details")]
-        public async Task<IActionResult> CreateManyWithDetails(List<CustomerDetailsDto> customerDetailsDtos)
+        public async Task<IActionResult> CreateManyWithDetails(List<CreateCustomerDetailsDto> customerDetailsDtos)
         {
             var response = await _customerService.AddRangeCustomersWithDependentsAsync(customerDetailsDtos);
             if (response.IsSuccessful) return Ok(response);

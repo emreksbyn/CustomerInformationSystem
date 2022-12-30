@@ -4,7 +4,6 @@ using Core.Responses;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.Dtos.Customer;
-using System.Collections.Generic;
 
 namespace Business.Concrete
 {
@@ -56,14 +55,14 @@ namespace Business.Concrete
             return Response<NoContent>.Success("Müşteri başarı ile eklendi.");
         }
 
-        public async Task<IResponse<NoContent>> AddCustomerWithDependentsAsync(CustomerDetailsDto customerDetailsDto)
+        public async Task<IResponse<NoContent>> AddCustomerWithDependentsAsync(CreateCustomerDetailsDto customerDetailsDto)
         {
             Customer customer = _mapper.Map<Customer>(customerDetailsDto);
             await _customerRepository.AddCustomerWithDependentsAsync(customer);
             return Response<NoContent>.Success("Müşteri ve bilgileri başarı ile eklendi.");
         }
 
-        public async Task<IResponse<NoContent>> AddRangeCustomersWithDependentsAsync(List<CustomerDetailsDto> customerDetailsDtos)
+        public async Task<IResponse<NoContent>> AddRangeCustomersWithDependentsAsync(List<CreateCustomerDetailsDto> customerDetailsDtos)
         {
             List<Customer> customers = _mapper.Map<List<Customer>>(customerDetailsDtos);
             await _customerRepository.AddRangeCustomersWithDependentsAsync(customers);

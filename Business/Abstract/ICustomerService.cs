@@ -13,8 +13,8 @@ namespace Business.Abstract
         Task<IResponse<CustomerDetailsDto>> GetCustomerDetailsByIdAsync(int id);
 
         Task<IResponse<NoContent>> AddAsync(CreateCustomerDto createCustomerDto);
-        Task<IResponse<NoContent>> AddCustomerWithDependentsAsync(CustomerDetailsDto customer);
-        Task<IResponse<NoContent>> AddRangeCustomersWithDependentsAsync(List<CustomerDetailsDto> customers);
+        Task<IResponse<NoContent>> AddCustomerWithDependentsAsync(CreateCustomerDetailsDto customer);
+        Task<IResponse<NoContent>> AddRangeCustomersWithDependentsAsync(List<CreateCustomerDetailsDto> customers);
 
         Task<IResponse<NoContent>> UpdateAsync(UpdateCustomerDto updateCustomerDto);
         Task<IResponse<NoContent>> UpdateCustomerWithDependentsAsync(CustomerDetailsDto customer);
