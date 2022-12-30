@@ -11,6 +11,10 @@ namespace DataAccess.Concrete.EntityFramework.Configurations
             builder.Property(x => x.Description).IsRequired(true);
             builder.Property(x => x.TelephoneNo).IsRequired(true);
             builder.Property(x => x.CustomerId).IsRequired(true);
+
+            builder.HasData(new TelephoneNumber(1, "Kişisel", "1234567", 1),
+                            new TelephoneNumber(2, "İş", "7654321", 1));
+
             base.Configure(builder);
         }
     }

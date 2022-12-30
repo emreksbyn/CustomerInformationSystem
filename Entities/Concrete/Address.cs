@@ -10,5 +10,18 @@ namespace Entities.Concrete
 
         public int CustomerId { get; set; }
         public Customer Customer { get; set; }
+        public Address()
+        {
+
+        }
+
+        public Address(int id, string description, string city, string district, int customerId)
+        {
+            Id = id;
+            Description = description;
+            City = city;
+            District = district;
+            CustomerId = customerId;
+        }
     }
 }

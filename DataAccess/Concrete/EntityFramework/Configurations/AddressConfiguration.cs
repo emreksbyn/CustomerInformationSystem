@@ -12,6 +12,11 @@ namespace DataAccess.Concrete.EntityFramework.Configurations
             builder.Property(x => x.City).IsRequired(true);
             builder.Property(x => x.District).IsRequired(true);
             builder.Property(x => x.CustomerId).IsRequired(true);
+
+
+            builder.HasData(new Address(1, "Ev", "İstanbul", "Kadıköy", 1),
+                            new Address(2, "İş", "İstanbul", "Ataşehir", 1));
+
             base.Configure(builder);
         }
     }

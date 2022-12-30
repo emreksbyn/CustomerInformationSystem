@@ -12,6 +12,9 @@ namespace DataAccess.Concrete.EntityFramework.Configurations
             builder.Property(x => x.Surname).IsRequired(true);
             builder.Property(x => x.TcNo).IsRequired(true);
             builder.Property(x => x.Email).IsRequired(false);
+
+            builder.HasData(new Customer(1, "Emre", "Kısaboyun", "123", "emre@gmail.com"));
+
             base.Configure(builder);
         }
     }
