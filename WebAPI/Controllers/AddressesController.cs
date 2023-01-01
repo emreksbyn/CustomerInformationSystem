@@ -30,6 +30,14 @@ namespace WebAPI.Controllers
             return BadRequest(response.Message);
         }
 
+        [HttpGet("get-by-customerId")]
+        public async Task<IActionResult> GetByCustomerId(int customerId)
+        {
+            var response = await _addressService.GetByCustomerIdAsync(customerId);
+            if (response.IsSuccessful) return Ok(response);
+            return BadRequest(response.Message);
+        }
+
         [HttpPost("create")]
         public async Task<IActionResult> Create(CreateAddressDto createAddressDto)
         {

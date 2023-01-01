@@ -38,6 +38,13 @@ namespace Business.Concrete
             return Response<List<AddressDto>>.Success(addressDtos, "Adresler listelendi.");
         }
 
+        public async Task<IResponse<List<AddressDto>>> GetByCustomerIdAsync(int customerId)
+        {
+            List<Address> addresses = await _addressRepository.GetByCustomerIdAsync(customerId);
+            List<AddressDto> addressDtos = _mapper.Map<List<AddressDto>>(addresses);
+            return Response<List<AddressDto>>.Success(addressDtos, "Adresler müşteriye göre listelendi.");
+        }
+
         public async Task<IResponse<AddressDto>> GetByIdAsync(int id)
         {
             Address address = await _addressRepository.GetAsync(x => x.Id == id);

@@ -5,5 +5,6 @@ namespace DataAccess.Abstract
 {
     public interface IAddressRepository : IEntityRepository<Address>
     {
+        Task<List<Address>> GetByCustomerIdAsync(int id);
     }
 }

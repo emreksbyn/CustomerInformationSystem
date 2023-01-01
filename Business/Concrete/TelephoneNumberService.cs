@@ -38,6 +38,13 @@ namespace Business.Concrete
             return Response<List<TelephoneNumberDto>>.Success(telephoneNumberDtos, "Telefon numaraları listelendi.");
         }
 
+        public async Task<IResponse<List<TelephoneNumberDto>>> GetByCustomerIdAsync(int customerId)
+        {
+            List<TelephoneNumber> telephoneNumbers = await _telephoneNumberRepository.GetByCustomerIdAsync(customerId);
+            List<TelephoneNumberDto> telephoneNumberDtos = _mapper.Map<List<TelephoneNumberDto>>(telephoneNumbers);
+            return Response<List<TelephoneNumberDto>>.Success(telephoneNumberDtos, "Telefon numaraları müşteriye göre listelendi.");
+        }
+
         public async Task<IResponse<TelephoneNumberDto>> GetByIdAsync(int id)
         {
             TelephoneNumber telephoneNumber = await _telephoneNumberRepository.GetAsync(x => x.Id == id);

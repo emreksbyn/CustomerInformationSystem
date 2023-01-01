@@ -7,6 +7,7 @@ namespace Business.Abstract
     {
         Task<IResponse<List<TelephoneNumberDto>>> GetAllAsync();
         Task<IResponse<TelephoneNumberDto>> GetByIdAsync(int id);
+        Task<IResponse<List<TelephoneNumberDto>>> GetByCustomerIdAsync(int customerId);
         Task<IResponse<NoContent>> AddAsync(CreateTelephoneNumberDto createTelephoneNumberDto);
         Task<IResponse<NoContent>> UpdateAsync(UpdateTelephoneNumberDto updateTelephoneNumberDto);
         Task<IResponse<NoContent>> DeleteAsync(TelephoneNumberDto telephoneNumberDto);
