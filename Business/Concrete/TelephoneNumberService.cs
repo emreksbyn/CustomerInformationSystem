@@ -31,6 +31,12 @@ namespace Business.Concrete
             return Response<NoContent>.Success("Telefon numarası başarı ile silindi.");
         }
 
+        public async Task<IResponse<NoContent>> DeleteByIdAsync(int id)
+        {
+            await _telephoneNumberRepository.DeleteByIdAsync(id);
+            return Response<NoContent>.Success("Telefon numarası başarı ile silindi.");
+        }
+
         public async Task<IResponse<List<TelephoneNumberDto>>> GetAllAsync()
         {
             List<TelephoneNumber> telephoneNumbers = await _telephoneNumberRepository.GetAllAsync();

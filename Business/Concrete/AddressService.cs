@@ -2,6 +2,7 @@
 using Business.Abstract;
 using Core.Responses;
 using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using Entities.Dtos.Address;
 
@@ -28,6 +29,12 @@ namespace Business.Concrete
         {
             Address address = _mapper.Map<Address>(addressDto);
             await _addressRepository.DeleteAsync(address);
+            return Response<NoContent>.Success("Adres başarı ile silindi.");
+        }
+
+        public async Task<IResponse<NoContent>> DeleteByIdAsync(int id)
+        {
+            await _addressRepository.DeleteByIdAsync(id);
             return Response<NoContent>.Success("Adres başarı ile silindi.");
         }
 

@@ -55,9 +55,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpDelete("delete")]
-        public async Task<IActionResult> Delete(AddressDto addressDto)
+        public async Task<IActionResult> Delete(int id)
         {
-            var response = await _addressService.DeleteAsync(addressDto);
+            var response = await _addressService.DeleteByIdAsync(id);
             if (response.IsSuccessful) return Ok(response);
             return BadRequest(response.Message);
         }

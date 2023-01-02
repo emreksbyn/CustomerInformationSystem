@@ -17,6 +17,8 @@ namespace Entities.Concrete
         public List<Address> Addresses { get; set; }
         public List<TelephoneNumber> TelephoneNumbers { get; set; }
 
+        public bool HaveUnsualName { get; set; } = false;
+
         public Customer(int id, string name, string surname, string tcNo, string email)
         {
             Id = id;

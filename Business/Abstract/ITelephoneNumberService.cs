@@ -11,5 +11,6 @@ namespace Business.Abstract
         Task<IResponse<NoContent>> AddAsync(CreateTelephoneNumberDto createTelephoneNumberDto);
         Task<IResponse<NoContent>> UpdateAsync(UpdateTelephoneNumberDto updateTelephoneNumberDto);
         Task<IResponse<NoContent>> DeleteAsync(TelephoneNumberDto telephoneNumberDto);
+        Task<IResponse<NoContent>> DeleteByIdAsync(int id);
     }
 }
