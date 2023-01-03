@@ -13,5 +13,7 @@ namespace Entities.Dtos.Customer
 
         public List<AddressDto> Addresses { get; set; }
         public List<TelephoneNumberDto> TelephoneNumbers { get; set; }
+
+        public bool HaveUnsualName { get; set; }
     }
 }

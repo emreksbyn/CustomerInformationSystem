@@ -1,6 +1,6 @@
 ﻿namespace Business.BusinessRules.CustomerServiceRules
 {
-    public class CreateCustomerRule
+    public class CustomerRules
     {
         public static bool IsUnusualName(string name)
         {

@@ -51,7 +51,7 @@ namespace Business.Concrete
         #region AddMethods
         public async Task<IResponse<NoContent>> AddAsync(CreateCustomerDto createCustomerDto)
         {
-            if (CreateCustomerRule.IsUnusualName(createCustomerDto.Name))
+            if (CustomerRules.IsUnusualName(createCustomerDto.Name))
             {
                 Customer customer = _mapper.Map<Customer>(createCustomerDto);
                 customer.HaveUnsualName = true;
@@ -68,7 +68,7 @@ namespace Business.Concrete
 
         public async Task<IResponse<NoContent>> AddCustomerWithDependentsAsync(CreateCustomerDetailsDto customerDetailsDto)
         {
-            if (CreateCustomerRule.IsUnusualName(customerDetailsDto.Name))
+            if (CustomerRules.IsUnusualName(customerDetailsDto.Name))
             {
                 Customer customer = _mapper.Map<Customer>(customerDetailsDto);
                 customer.HaveUnsualName = true;
@@ -90,7 +90,7 @@ namespace Business.Concrete
             {
                 Customer customer = _mapper.Map<Customer>(item);
 
-                if (CreateCustomerRule.IsUnusualName(customer.Name))
+                if (CustomerRules.IsUnusualName(customer.Name))
                 {
                     customer.HaveUnsualName = true;
                     customerList.Add(customer);
@@ -108,21 +108,56 @@ namespace Business.Concrete
         #region UpdateMethods
         public async Task<IResponse<NoContent>> UpdateAsync(UpdateCustomerDto updateCustomerDto)
         {
-            Customer customer = _mapper.Map<Customer>(updateCustomerDto);
-            await _customerRepository.UpdateAsync(customer);
-            return Response<NoContent>.Success("Müşteri başarı ile güncellendi.");
+            if (CustomerRules.IsUnusualName(updateCustomerDto.Name))
+            {
+                Customer customer = _mapper.Map<Customer>(updateCustomerDto);
+                customer.HaveUnsualName = true;
+                await _customerRepository.UpdateAsync(customer);
+                return Response<NoContent>.Success("Müşteri başarı ile güncellendi.");
+            }
+            else
+            {
+                Customer customer = _mapper.Map<Customer>(updateCustomerDto);
+                await _customerRepository.UpdateAsync(customer);
+                return Response<NoContent>.Success("Müşteri başarı ile güncellendi.");
+            }
+
         }
         public async Task<IResponse<NoContent>> UpdateCustomerWithDependentsAsync(CustomerDetailsDto customerDetailsDto)
         {
-            Customer customer = _mapper.Map<Customer>(customerDetailsDto);
-            await _customerRepository.UpdateCustomerWithDependentsAsync(customer);
-            return Response<NoContent>.Success("Müşteri ve bilgileri başarı ile güncellendi.");
+            if (CustomerRules.IsUnusualName(customerDetailsDto.Name))
+            {
+                Customer customer = _mapper.Map<Customer>(customerDetailsDto);
+                customer.HaveUnsualName = true;
+                await _customerRepository.UpdateCustomerWithDependentsAsync(customer);
+                return Response<NoContent>.Success("Müşteri ve bilgileri başarı ile güncellendi.");
+            }
+            else
+            {
+                Customer customer = _mapper.Map<Customer>(customerDetailsDto);
+                await _customerRepository.UpdateCustomerWithDependentsAsync(customer);
+                return Response<NoContent>.Success("Müşteri ve bilgileri başarı ile güncellendi.");
+            }
         }
 
         public async Task<IResponse<NoContent>> UpdateRangeCustomersWithDependentsAsync(List<CustomerDetailsDto> customerDetailsDtos)
         {
-            List<Customer> customers = _mapper.Map<List<Customer>>(customerDetailsDtos);
-            await _customerRepository.UpdateRangeCustomersWithDependentsAsync(customers);
+            List<Customer> customerList = new List<Customer>();
+            foreach (var item in customerDetailsDtos)
+            {
+                Customer customer = _mapper.Map<Customer>(item);
+
+                if (CustomerRules.IsUnusualName(customer.Name))
+                {
+                    customer.HaveUnsualName = true;
+                    customerList.Add(customer);
+                }
+                else
+                {
+                    customerList.Add(customer);
+                }
+            }
+            await _customerRepository.UpdateRangeCustomersWithDependentsAsync(customerList);
             return Response<NoContent>.Success("Müşteriler ve bilgileri başarı ile güncellendi.");
         }
         #endregion

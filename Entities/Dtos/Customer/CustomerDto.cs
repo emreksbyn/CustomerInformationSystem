@@ -9,5 +9,7 @@ namespace Entities.Dtos.Customer
         public string Surname { get; set; }
         public string TcNo { get; set; }
         public string Email { get; set; }
+        public bool HaveUnsualName { get; set; }
+
     }
 }
