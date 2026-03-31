@@ -5,6 +5,8 @@ using Business.Concrete;
 using Business.Mapping.AutoMapper;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace Business.IoC.Autofac
 {
@@ -25,8 +27,11 @@ namespace Business.IoC.Autofac
             builder.Register(context => new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile<MappingProfiles>();
-            }
-            )).AsSelf().SingleInstance();
+            },
+            context.Resolve<ILoggerFactory>()
+            ))
+            .AsSelf()
+            .SingleInstance();
 
             builder.Register(c =>
             {
